@@ -1,3 +1,4 @@
+const e = require("cors");
 const User = require("../models/userModle");
 
 exports.validateEmail = (email) => {
@@ -5,10 +6,27 @@ exports.validateEmail = (email) => {
 };
 
 exports.validateLength = (text, min, max) => {
-    if (text.length < min || text.length >  max ){
+    if (text.length < min || text.length > max) {
         return false
-    }else{
+    } else {
         return true
     }
-}
+};
 
+exports.validationUsername = async(username)=>{
+     let isTrue = false;
+
+     do {
+        let user = await User.findOne({username});
+
+        if(user){
+            username += (+new Date()+Math.random()).toString().substring(0,1)
+            isTrue = true
+        }else{
+            isTrue = false
+        }
+        
+     } while (isTrue);
+
+     return username
+}
