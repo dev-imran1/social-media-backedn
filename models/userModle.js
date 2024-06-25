@@ -1,4 +1,4 @@
-const { text } = require('express');
+// const { text } = require('express');
 const mongooes = require('mongoose');
 const Schema = mongooes.Schema;
 const { objectId } = mongooes.Schema;
@@ -155,4 +155,4 @@ const UserModel = new Schema(
     }
 )
 
-module.mongooes = mongooes.model("usermodel", UserModel)
+module.exports = mongooes.model("usermodel", UserModel);
