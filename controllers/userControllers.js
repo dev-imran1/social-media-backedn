@@ -1,6 +1,7 @@
 const Users = require('../models/userModle.js');
 const {validateEmail, validateLength, validationUsername} = require('../helpers/validation.js');
 const bcrypt = require('bcrypt');
+const { jwt } = require('../helpers/token.js');
 exports.newUser = async (req, res) => {
     try {
         const {
@@ -76,6 +77,9 @@ exports.newUser = async (req, res) => {
             friends,
             followers
         }).save();
+
+        const emailToken = jwt({id: user._id.toString()}, "30m");
+        console.log(emailToken)
 
         res.send(user);
 
